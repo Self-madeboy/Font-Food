@@ -87,7 +87,7 @@
 				returnUrl: ""
 			},
 			created() {
-				
+
 				// 登录成功后会跳原来页面
 				var returnUrl = app.getUrlParam("returnUrl");
 				if (returnUrl != null && returnUrl != undefined && returnUrl != '') {
@@ -97,7 +97,7 @@
 			methods: {
 				getRequest() {
 				},
-				postRequest() {							
+				postRequest() {
 				},
 				doLogin() {
 
@@ -107,8 +107,8 @@
 					} else if (this.password == null || this.password == undefined || this.password == '') {
 						alert("密码不能为空");
 						return;
-					} else if (this.password.length < 6) {
-						alert("密码不能少于6位");
+					} else if (this.password.length < 7) {
+						alert("密码不能少于7位");
 						return;
 					}
 
@@ -126,7 +126,7 @@
 					// console.log(axios.defaults);
 					axios.post(serverUrl + '/passport/login', userBO)
 						.then(res => {
-							if (res.data.status == 200) {
+							if (res.result.code == 200) {
 								var user = res.data;
 								// console.log(user);
 
@@ -141,7 +141,9 @@
 								alert(res.data.msg);
 								return;
 							}
-						});
+						}).catch(err=>{
+						alert(err.response.data.message);
+					});
 				}
 			}
 		});
