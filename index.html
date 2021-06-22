@@ -235,7 +235,7 @@
 				</div>
 				<div class="clear "></div>
 			</div>
-			
+
 			<div class="footer ">
 				<div class="footer-hd ">
 					<p>
@@ -340,7 +340,7 @@
 				window.open("item.html?itemId=" + catOrItemId);
 			} else if (type == 2) {
 				window.open("catItems.html?searchType=catItems&catId=" + catOrItemId);
-				
+
 			}
 		}
 	</script>
@@ -424,7 +424,7 @@
 					var serverUrl = app.serverUrl;
 					var categoryList = this.categoryList;
 					var catIndex = this.catIndex;
-					
+
 					var rootCat = categoryList[catIndex];
 					if (rootCat == undefined || rootCat == null || rootCat == '') {
 						return;
@@ -438,8 +438,8 @@
 					axios.get(
 							serverUrl + '/index/sixNewItems/' + rootCatId, {})
 						.then(res => {
-							if (res.data.status == 200) {
-								var sixNewItemsListTemp = res.data.data
+							if (res.data.code == 200) {
+								var sixNewItemsListTemp = res.data.result
 								var sixNewItemsList = this.sixNewItemsList;
 								sixNewItemsList.push(sixNewItemsListTemp[0]);
 								this.sixNewItemsList = sixNewItemsList;
@@ -448,18 +448,18 @@
 							}
 						});
 				},
-				
+
 				renderCarousel() {
 					var serverUrl = app.serverUrl;
 					// 获得轮播图
 					axios.get(
 							serverUrl + '/index/carousel', {})
 						.then(res => {
-							if (res.data.status == 200) {
-								var carouselList = res.data.data
+							if (res.data.code == 200) {
+								var carouselList = res.data.result
 								this.carouselList = carouselList;
 
-							
+
 								// 循环渲染轮播图
 								var $slider = $('#demo-slider-0');
 								for (var i = 0; i < carouselList.length; i++) {
@@ -475,7 +475,7 @@
 									if (type == 2) {
 										catOrItemId = catId;
 									}
-									
+
 									catOrItemId = encodeURI(catOrItemId);
 
 									var cal = '<li class="" style="background: ' + carouselList[i].backgroundColor +
@@ -501,9 +501,9 @@
 					axios.get(
 							serverUrl + '/index/cats', {})
 						.then(res => {
-							
-							if (res.data.status == 200) {
-								var categoryList = res.data.data
+
+							if (res.data.code == 200) {
+								var categoryList = res.data.result
 								this.categoryList = categoryList;
 
 								var rootCatHtml = "";
@@ -555,8 +555,8 @@
 											axios.get(
 													serverUrl + '/index/subCat/' + rootCatId, {})
 												.then(res => {
-													if (res.data.status == 200) {
-														var catList = res.data.data
+													if (res.data.code == 200) {
+														var catList = res.data.result
 														// this.catList = catList;
 														// debugger;
 														var subRenderHtml = '';
@@ -585,7 +585,7 @@
 													}
 												});
 										}
-										// var renderHtml = '' 
+										// var renderHtml = ''
 										// 	+ '<dl class="dl-sort">'
 										// 		+ '<dt><span title="大包装">大包装</span></dt>'
 										// 		+ '<dd><a title="蒸蛋糕" href="#"><span>蒸蛋糕</span></a></dd>'
@@ -641,9 +641,9 @@
 					axios.defaults.withCredentials = true;
 					axios.post(serverUrl + '/passport/logout?userId=' + userId, {})
 						.then(res => {
-							if (res.data.status == 200) {
+							if (res.data.code == 200) {
 								window.location.href = "index.html";
-							} else if (res.data.status == 500) {
+							} else if (res.data.code == 500) {
 								alert(res.data.msg);
 								return;
 							}
@@ -653,7 +653,7 @@
 		});
 	</script>
 	<script type="text/javascript">
-		
+
 		$(window).scroll(
 			function() {
 				// scrollTop为滚动条在Y轴上的滚动距离。

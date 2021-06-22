@@ -11,8 +11,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -21,7 +21,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-    font-family: arial,"Lantinghei SC","Microsoft Yahei";	
+    font-family: arial,"Lantinghei SC","Microsoft Yahei";
 }
 
 html,body {
@@ -82,7 +82,7 @@ margin-right: 0px;border-bottom: 1px solid #0e90d2;border-radius: 0px;}
 
 @media screen and (min-width:640px){
 form,.am-cf,.partner{max-width:640px;margin:20px auto ;}
-.footer-bd{ display:block;}	
+.footer-bd{ display:block;}
 .partner h3 {text-align:left;}
 .am-btn-group i { display:inline-block;border-radius:0px;border:0px;background-color:transparent ;}
 .am-btn-group span{display:inline-block;}
@@ -109,7 +109,7 @@ form,.am-cf,.partner{max-width:640px;margin:20px auto ;}
 .login-boxtitle{display: block;}
 .zcnext{right: 20px;top: 15px;}
 /*背景*/
-.login-banner-bg{display:block;float:left;} 
+.login-banner-bg{display:block;float:left;}
 .am-btn-primary{width:100%;}
 
 /*修改的样式*/

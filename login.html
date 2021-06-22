@@ -59,20 +59,15 @@
 	<div class="footer ">
 		<div class="footer-hd ">
 			<p>
-				<a href="https://www.imooc.com/" target="_blank">慕课网</a>
+				<a href="https://www.imooc.com/" target="_blank">链接1</a>
 				<b>|</b>
-				<a href="https://coding.imooc.com/class/217.html" target="_blank">分布式架构仿抖音短视频</a>
+				<a href="https://coding.imooc.com/class/217.html" target="_blank">链接2</a>
 				<b>|</b>
-				<a href="https://coding.imooc.com/class/261.html" target="_blank">Netty仿微信聊天</a>
-				<b>|</b>
-				<a href="https://coding.imooc.com/class/201.html" target="_blank">Zookeeper与dubbo入门</a>
-				<b>|</b>
-				<a href="https://coding.imooc.com/class/293.html" target="_blank">支付宝小程序</a>
 			</p>
 		</div>
 		<div class="footer-bd ">
 			<p>
-				<em>© 2019 imooc.com 京ICP备12003892号-11 北京奥鹏文化传媒有限公司 版权所有</em>
+				<em>© 2021 XXXX 版权所有</em>
 			</p>
 		</div>
 	</div>
@@ -81,8 +76,8 @@
 		var index = new Vue({
 			el: "#login",
 			data: {
-				username: null,
-				password: null,
+				username: "jc",
+				password: "123456",
 
 				returnUrl: ""
 			},
@@ -107,8 +102,8 @@
 					} else if (this.password == null || this.password == undefined || this.password == '') {
 						alert("密码不能为空");
 						return;
-					} else if (this.password.length < 7) {
-						alert("密码不能少于7位");
+					} else if (this.password.length < 6) {
+						alert("密码不能少于6位");
 						return;
 					}
 
@@ -126,7 +121,7 @@
 					// console.log(axios.defaults);
 					axios.post(serverUrl + '/passport/login', userBO)
 						.then(res => {
-							if (res.result.code == 200) {
+							if (res.data.code == 200) {
 								var user = res.data;
 								// console.log(user);
 
@@ -137,12 +132,13 @@
 									window.location.href = "index.html";
 								}
 
-							} else if (res.data.status == 500) {
-								alert(res.data.msg);
+							} else if (res.data.code == 500) {
+								alert(res.data.message);
 								return;
 							}
 						}).catch(err=>{
 						alert(err.response.data.message);
+						this.password = null;
 					});
 				}
 			}

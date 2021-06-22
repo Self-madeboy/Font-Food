@@ -10,7 +10,7 @@
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 		<link rel="shortcut icon" href="img/foodie.ico"/>
-		
+
 		<link rel="stylesheet" href="AmazeUI-2.4.2/assets/css/amazeui.min.css" />
 		<link href="css/dlstyle.css" rel="stylesheet" type="text/css">
 		<script src="AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
@@ -42,23 +42,23 @@
 							<div class="am-tabs-bd" id="regist">
 								<div class="am-tab-panel am-active">
 									<form method="post">
-										
+
 										<div class="user-email">
 											<label for="username"><i class="am-icon-envelope-o"></i></label>
 											<input id="username" v-model="username" placeholder="请输入用户名">
 										</div>
 										<div v-show="errUsernameIsShow" style="padding: 10px;font-size: 12px;color: red;">
 											{{errUsername}}
-										</div>										
+										</div>
 										<div class="user-pass">
 											<label for="password"><i class="am-icon-lock"></i></label>
 											<input type="password" id="password" v-model="password" placeholder="设置密码">
-										</div>										
+										</div>
 										<div class="user-pass">
 											<label for="confirmPassword"><i class="am-icon-lock"></i></label>
 											<input type="password" id="confirmPassword" v-model="confirmPassword" placeholder="确认密码">
 										</div>
-									
+
 										<div class="login-links">
 											<a :href="'login.html?returnUrl=' + returnUrl" class="am-fr">已有账号？去登录</a>
 											<br />
@@ -95,7 +95,7 @@
 				</p>
 			</div>
 		</div>
-			
+
 		<script type="text/javascript " src="js/app.js"></script>
 		<script type="text/javascript">
 			var index = new Vue({
@@ -125,22 +125,25 @@
 						// console.log(this.username);
 						axios.get(serverUrl + '/passport/usernameIsExist?username=' + username, {})
 							.then(res => {
-								if (res.data.status == 200) {
+								if (res.data.code == 200) {
 									this.errUsername = null;
 									this.errUsernameIsShow = false;
 									return;
-								} else if (res.data.status == 500) {
+								} else if (res.data.code == 500) {
 									this.errUsername = res.data.msg;
 									this.errUsernameIsShow = true;
 									return;
 								}
-							});
+							}).catch(err=>{
+							alert(err.response.data.message);
+							this.username = null;
+						});
 					}
 				},
 				methods: {
 					getRequest() {
 					},
-					postRequest() {							
+					postRequest() {
 					},
 					// usernameIsExist() {
 					// 	console.log(this.username);
@@ -178,8 +181,8 @@
 						// console.log(axios.defaults);
 						axios.post(serverUrl + '/passport/regist', userBO)
 							.then(res => {
-								if (res.data.status == 200) {
-									var user = res.data;
+								if (res.data.code == 200) {
+									var user = res.data.data;
 									// console.log(user);
 									// window.location.href = app.ctx + "/index.html";
 									// window.location.href = "index.html";
